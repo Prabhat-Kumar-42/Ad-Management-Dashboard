@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Platform {
+  GOOGLE
+  META
+}
+
+enum JobStatus {
+  DRAFT
+  PENDING
+  IN_PROGRESS
+  SUCCESS
+  FAILED
+}
+
+model User {
+  id          String               @id @default(cuid())
+  email       String               @unique
+  password    String
+  createdAt   DateTime             @default(now())
+  connections PlatformConnection[]
+  accounts    AdAccount[]
+}
+
+model PlatformConnection {
+  id            String      @id @default(cuid())
+  platform      Platform
+  providerUserId String
+  accessToken   String
+  refreshToken  String
+  expiresAt     DateTime
+  meta          Json?
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
+  accounts      AdAccount[] // Added opposite relation
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([platform, userId])
+}
+
+model AdAccount {
+  id          String           @id @default(cuid())
+  platform    Platform
+  externalId  String
+  name        String
+  currency    String
+  timezone    String
+  connection  PlatformConnection @relation(fields: [connectionId], references: [id])
+  connectionId String
+  user        User             @relation(fields: [userId], references: [id])  // Added relation to User
+  userId      String
+  campaigns   Campaign[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@unique([platform, externalId])
+}
+
+model Campaign {
+  id          String     @id @default(cuid())
+  platform    Platform
+  externalId  String?    // Null if not yet published
+  name        String
+  account     AdAccount  @relation(fields: [accountId], references: [id])
+  accountId   String
+  adGroups    AdGroup[]
+  jobs        CampaignJob[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model AdGroup {
+  id          String   @id @default(cuid())
+  platform    Platform
+  externalId  String?
+  name        String
+  campaign    Campaign @relation(fields: [campaignId], references: [id])
+  campaignId  String
+  ads         Ad[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Ad {
+  id          String   @id @default(cuid())
+  platform    Platform
+  externalId  String?
+  name        String
+  adGroup     AdGroup  @relation(fields: [adGroupId], references: [id])
+  adGroupId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MetricsDaily {
+  id          String   @id @default(cuid())
+  date        DateTime
+  platform    Platform
+  accountId   String
+  campaignId  String?
+  adGroupId   String?
+  adId        String?
+  impressions Int       @default(0)
+  clicks      Int       @default(0)
+  spendMicros BigInt    @default(0)
+  conversions Float     @default(0)
+  videoViews  Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([platform, date, accountId])
+  @@unique([date, platform, accountId, campaignId, adGroupId, adId])
+}
+
+model SyncJob {
+  id          String   @id @default(cuid())
+  platform    Platform
+  accountId   String
+  status      String   // QUEUED, RUNNING, SUCCESS, FAILED
+  startedAt   DateTime?
+  finishedAt  DateTime?
+  logs        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CampaignJob {
+  id          String     @id @default(cuid())
+  campaign    Campaign   @relation(fields: [campaignId], references: [id])
+  campaignId  String
+  action      String     // "CREATE", "UPDATE"
+  status      JobStatus  @default(DRAFT)
+  payload     Json
+  error       String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
