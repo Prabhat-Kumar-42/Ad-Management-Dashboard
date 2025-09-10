@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 
+// /src/utils/jwt.util.ts
+
 const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
 
 export function generateAccessToken(payload: object) {
