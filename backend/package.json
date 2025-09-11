@@ -14,11 +14,13 @@
     "@prisma/client": "^6.16.0",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
+    "bullmq": "^5.58.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "facebook-nodejs-business-sdk": "^23.0.1",
     "google-auth-library": "^10.3.0",
     "googleapis": "^159.0.0",
+    "ioredis": "^5.7.0",
     "jsonwebtoken": "^9.0.2",
     "prisma": "^6.16.0",
     "zod": "^4.1.5"
