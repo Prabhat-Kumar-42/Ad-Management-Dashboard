@@ -18,6 +18,9 @@ const googleOauth2Client = new OAuth2Client({
 });
 const GOOGLE_SCOPES = [
   'https://www.googleapis.com/auth/adwords',
+  'openid',
+  'email',
+  'profile',
 ];
 
 // Meta setup
@@ -73,7 +76,7 @@ export const oauthService = {
 
   // Meta: Get OAuth URL
   getMetaAuthUrl() {
-    return `https://www.facebook.com/v16.0/dialog/oauth?client_id=${META_CLIENT_ID}&redirect_uri=${encodeURIComponent(META_REDIRECT_URI)}&scope=ads_management`;
+    return `https://www.facebook.com/v16.0/dialog/oauth?client_id=${META_CLIENT_ID}&redirect_uri=${encodeURIComponent(META_REDIRECT_URI)}&scope=ads_management,public_profile,email`;
   },
 
   // Meta: Handle Callback
