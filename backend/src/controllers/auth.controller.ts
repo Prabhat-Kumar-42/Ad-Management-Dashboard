@@ -5,6 +5,8 @@ import z from 'zod';
 import { LoginUserSchema, RegisterUserSchema } from '../validators/auth.validator.js';
 import { UserResponseSchema } from '../validators/user.validator.js';
 
+// /src/controllers/auth.controller.ts
+
 export const register = async (req: Request, res: Response) => {
     const parsedBody = RegisterUserSchema.safeParse(req.body);
     if (!parsedBody.success) {
@@ -30,12 +32,4 @@ export const login = async (req: Request, res: Response) => {
 
     const tokens = await loginUser(email, password);
     res.json(tokens);
-};
-
-export const oauthGoogle = (req: Request, res: Response) => {
-  res.json({ message: 'Google OAuth flow placeholder' });
-};
-
-export const oauthMeta = (req: Request, res: Response) => {
-  res.json({ message: 'Meta OAuth flow placeholder' });
 };
