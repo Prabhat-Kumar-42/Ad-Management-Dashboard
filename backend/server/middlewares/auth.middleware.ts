@@ -4,7 +4,7 @@ import type { AuthRequest } from "../types/auth-request.type.js";
 import { UnauthorizedError } from "../utils/http-error.util.js";
 import type { UserResponseDTO } from "../dto/user-response.dto.js";
 
-// /src/middlewares/auth.middleware.ts
+// /server/middlewares/auth.middleware.ts
 
 export function authenticate(
   req: AuthRequest,

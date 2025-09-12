@@ -5,7 +5,7 @@ import { oauthService } from '../services/oauth.services.js';
 import { oauthQuerySchema } from '../validators/oauth.validator.js';
 import { z } from 'zod';
 
-// /src/controllers/oauth.controller.ts
+// /server/controllers/oauth.controller.ts
 
 // Google: Redirect to Google OAuth
 export function oauthGoogle(req: Request, res: Response) {

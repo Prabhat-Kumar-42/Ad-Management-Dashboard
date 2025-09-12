@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { authenticate } from '../middlewares/auth.middleware.js';
 import { createCampaign, getCampaignJobs, updateCampaign } from '../controllers/campaign.controller.js';
 
-// /src/routes/campaign.route.ts
+// /server/routes/campaign.route.ts
 
 export const campaignRouter = Router();
 

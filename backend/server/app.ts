@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import {} from './controllers/auth.controller.js';
 import { appRouter } from './routes/app.routes.js';
 
-// /src/app.ts
+// /server/app.ts
 
 dotenv.config();
 

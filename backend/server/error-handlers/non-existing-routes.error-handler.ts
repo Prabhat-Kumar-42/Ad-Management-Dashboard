@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { HttpError, NotFoundError } from "../utils/http-error.util.js";
 
-// /src/error-handlers/non-existing-routes.error-handler.ts
+// /server/error-handlers/non-existing-routes.error-handler.ts
 
 export function nonExistingRoutesErrorHandler(
   req: Request,

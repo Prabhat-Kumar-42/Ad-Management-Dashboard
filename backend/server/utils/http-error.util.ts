@@ -1,5 +1,5 @@
 
-// /src/utils/http-error.util.ts
+// /server/utils/http-error.util.ts
 export class HttpError extends Error {
   status: number;
   details?: any;

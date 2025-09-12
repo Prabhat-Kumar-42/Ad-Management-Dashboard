@@ -1,10 +1,10 @@
 import { JobStatus, CampaignJobAction } from '@prisma/client';
-import { campaignQueue } from '../queues/queue.js';
+import { campaignQueue } from '../queue/queue.js';
 import type { CreateCampaignInput, UpdateCampaignInput } from '../types/campaign.types.js';
-import { prisma } from '../db/db.js';
+import { prisma } from '@shared/db/db.js';
 import { NotFoundError, UnauthorizedError } from '../utils/http-error.util.js';
 
-// /src/services/campaigns.service.ts
+// /server/services/campaigns.service.ts
 
 export const campaignsService = {
   async createCampaign(userId: string, data: CreateCampaignInput) {

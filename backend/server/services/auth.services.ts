@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
-import { prisma } from '../db/db.js';
+import { prisma } from '@shared/db/db.js';
 import { BadRequestError, UnauthorizedError } from '../utils/http-error.util.js';
 import { userModelToDTO } from '../utils/model-to-dto.js';
 import { getSuccessTokens } from '../utils/helpers.util.js';
 
-// /src/services/auth.services.js
+// /server/services/auth.services.js
 export const registerUser = async (email: string, password: string) => {
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) throw new BadRequestError('User already exists', { email });

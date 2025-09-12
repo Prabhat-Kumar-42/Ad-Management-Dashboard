@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 
-// /src/error-handlers/jwt.error-handler.ts
+// /server/error-handlers/jwt.error-handler.ts
 
 export function jwtErrorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
   if (err.name === 'TokenExpiredError') {

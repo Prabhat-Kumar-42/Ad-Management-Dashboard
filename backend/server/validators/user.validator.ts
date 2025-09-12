@@ -1,6 +1,6 @@
 import z from 'zod';
 
-// /src/validators/user.validator.ts
+// /server/validators/user.validator.ts
 
 export const UserResponseSchema = z.object({
   id: z.string(),

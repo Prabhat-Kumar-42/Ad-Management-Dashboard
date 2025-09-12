@@ -5,7 +5,7 @@ import z from 'zod';
 import { LoginUserSchema, RegisterUserSchema } from '../validators/auth.validator.js';
 import { UserResponseSchema } from '../validators/user.validator.js';
 
-// /src/controllers/auth.controller.ts
+// /server/controllers/auth.controller.ts
 
 export const register = async (req: Request, res: Response) => {
     const parsedBody = RegisterUserSchema.safeParse(req.body);

@@ -3,7 +3,7 @@ import { register, login } from '../controllers/auth.controller.js';
 import { oauthGoogle, oauthGoogleCallback, oauthMeta, oauthMetaCallback } from '../controllers/oauth.controller.js';
 import { authenticate } from '../middlewares/auth.middleware.js';
 
-// /src/routes/auth.routes.ts
+// /server/routes/auth.routes.ts
 export const authRouter = Router();
 
 authRouter.post('/register', register);

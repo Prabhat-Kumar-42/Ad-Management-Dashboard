@@ -1,6 +1,6 @@
 import type { User } from "@prisma/client"
 
-// /src/utils/model-to-dto.ts
+// /server/utils/model-to-dto.ts
 
 export const userModelToDTO = (user: User) => {
     return {

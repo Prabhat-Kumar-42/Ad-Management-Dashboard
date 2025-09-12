@@ -5,7 +5,7 @@ import { createCampaignSchema, updateCampaignSchema } from '../validators/campai
 import { campaignsService } from '../services/campaign.service.js';
 import z from 'zod';
 
-// /src/controllers/campaign.controller.ts
+// /server/controllers/campaign.controller.ts
 
 export async function createCampaign(req: AuthRequest, res: Response) {
   if (!req.user) throw new UnauthorizedError();

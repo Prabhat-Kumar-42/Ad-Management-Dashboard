@@ -1,7 +1,7 @@
-import { prisma } from '../db/db.js';
-import { BadRequestError, NotFoundError } from '../utils/http-error.util.js';
+import { prisma } from '@shared/db/db.js';
+import { NotFoundError } from '../utils/http-error.util.js';
 
-// /src/services/ad-account.service.ts
+// /server/services/ad-account.service.ts
 
 export const adAccountService = {
   async listAccounts(userId: string) {

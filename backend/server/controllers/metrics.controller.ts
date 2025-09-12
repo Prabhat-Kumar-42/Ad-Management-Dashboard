@@ -5,7 +5,7 @@ import { metricsQuerySchema } from '../validators/metrics-query.validator.js';
 import { metricsService } from '../services/metrics.service.js';
 import z from 'zod';
 
-// /src/controllers/metrics.controller.ts
+// /server/controllers/metrics.controller.ts
 
 // GET /api/metrics
 export async function getMetrics(req: AuthRequest, res: Response) {

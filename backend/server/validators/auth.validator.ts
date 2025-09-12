@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// /src/validators/auth.validator.ts
+// /server/validators/auth.validator.ts
 
 // Schema for Register User
 export const RegisterUserSchema = z.object({

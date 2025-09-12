@@ -1,7 +1,7 @@
 import { Platform } from '@prisma/client';
 import { z } from 'zod';
 
-// /src/validators/campaign.validator.ts
+// /server/validators/campaign.validator.ts
 
 export const createCampaignSchema = z.object({
   name: z.string().min(1),

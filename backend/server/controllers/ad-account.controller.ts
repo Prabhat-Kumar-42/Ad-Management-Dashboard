@@ -5,7 +5,7 @@ import { adAccountService } from '../services/ad-account.service.js';
 import { z } from 'zod';
 import { adAccountParamsSchema } from '../validators/ad-account.validator.js';
 
-// /src/controllers/ad-account.controller.ts
+// /server/controllers/ad-account.controller.ts
 
 //  // GET /api/ad-accounts
 export async function listAccounts(req: AuthRequest, res: Response) {

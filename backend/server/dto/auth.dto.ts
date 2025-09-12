@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { LoginUserSchema, RegisterUserSchema } from '../validators/auth.validator.js';
 
-// /src/dto/auth.dto.ts
+// /server/dto/auth.dto.ts
 
 // DTO for Register User
 export type RegisterUserDTO = z.infer<typeof RegisterUserSchema>;

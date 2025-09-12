@@ -2,10 +2,10 @@ import axios from 'axios';
 import { OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
 import { FacebookAdsApi, User as FBUser } from 'facebook-nodejs-business-sdk';
-import { prisma } from '../db/db.js';
+import { prisma } from '@shared/db/db.js';
 import { Platform } from '@prisma/client';
 
-// /src/services/oauth.services.ts
+// /server/services/oauth.services.ts
 
 // Google setup
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;

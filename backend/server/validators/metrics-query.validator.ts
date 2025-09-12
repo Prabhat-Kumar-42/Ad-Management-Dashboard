@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// /src/validators/metrics-query.validator.ts
+// /server/validators/metrics-query.validator.ts
 
 export const metricsQuerySchema = z.object({
   startDate: z.string().optional(),

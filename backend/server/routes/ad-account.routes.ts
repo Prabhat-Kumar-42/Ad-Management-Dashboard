@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { authenticate } from '../middlewares/auth.middleware.js';
 import { getAccount, listAccounts, refreshAccount } from '../controllers/ad-account.controller.js';
 
-// /src/routes/ad-account.routes.ts
+// /server/routes/ad-account.routes.ts
 
 export const adAccountsRouter = Router();
 

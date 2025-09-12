@@ -1,7 +1,7 @@
-import { prisma } from '../db/db.js';
+import { prisma } from '@shared/db/db.js';
 import type { MetricsQueryParams } from '../types/metric-query-params.type.js';
 
-// /src/services/metrics.service.ts
+// /server/services/metrics.service.ts
 
 export const metricsService = {
   async getMetrics(userId: string, query: MetricsQueryParams) {
