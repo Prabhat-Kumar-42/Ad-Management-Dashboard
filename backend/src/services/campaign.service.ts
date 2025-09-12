@@ -34,9 +34,24 @@ export const campaignsService = {
     });
 
     // Enqueue job
-    await campaignQueue.add(CampaignJobAction.CREATE, { jobId: job.id, campaignId: campaign.id });
+    await campaignQueue.add(
+      CampaignJobAction.CREATE, 
+      { 
+        jobId: job.id, 
+        campaignId: campaign.id 
+      },
+      {
+      attempts: 3,
+      backoff: {
+        type: 'exponential',
+        delay: 5000,
+      },
+    });
 
-    return { campaign, job };
+    return { 
+      campaign, 
+      message: 'Campaign creation queued' 
+    };
   },
 
   async updateCampaign(userId: string, campaignId: string, data: UpdateCampaignInput) {
@@ -67,9 +82,23 @@ export const campaignsService = {
     });
 
     // Enqueue job
-    await campaignQueue.add(CampaignJobAction.UPDATE, { jobId: job.id, campaignId });
-
-    return { campaign: updatedCampaign, job };
+    await campaignQueue.add(CampaignJobAction.UPDATE, 
+      { 
+        jobId: job.id, 
+        campaignId 
+      }, 
+      {
+      attempts: 3,
+      backoff: {
+        type: 'exponential',
+        delay: 5000,
+      },
+    });
+    
+    return { 
+      campaign: updatedCampaign,
+      message: 'Campaign updation queued'
+    };
   },
 
   async getCampaignJobs(userId: string, campaignId: string) {
