@@ -1,7 +1,7 @@
 import { Worker, Job } from 'bullmq';
 import { JobStatus } from '@prisma/client';
 import { processCampaign } from './processors/processor-index.js';
-import { prisma } from '../shared/db/db.js';
+import { prisma } from '@shared/db/db.js';
 import { connection } from '@shared/redis/redis.js';
 
 // /workers/campaign-worker.ts
