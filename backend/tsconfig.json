@@ -40,6 +40,6 @@
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["shared/*"]
-    }
+    },
   }
 }
