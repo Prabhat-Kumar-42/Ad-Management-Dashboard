@@ -8,8 +8,8 @@ export const authRouter = Router();
 authRouter.post('/register', register);
 authRouter.post('/login', login);
 
-authRouter.get('/oauth/google', oauthGoogle);
-authRouter.get('/oauth/google/callback', oauthGoogleCallbackLogin);
+authRouter.get('/google/login', oauthGoogle);
+authRouter.get('/google/callback', oauthGoogleCallbackLogin);
 
-authRouter.get('/oauth/meta', oauthMeta);
-authRouter.get('/oauth/meta/callback', oauthMetaCallbackLogin);
+authRouter.get('/meta/login', oauthMeta);
+authRouter.get('/meta/callback', oauthMetaCallbackLogin);
