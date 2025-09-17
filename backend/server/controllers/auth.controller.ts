@@ -10,33 +10,38 @@ import { oauthService } from 'server/services/oauth.services.js';
 // /server/controllers/auth.controller.ts
 
 export const register = async (req: Request, res: Response) => {
-    const parsedBody = RegisterUserSchema.safeParse(req.body);
-    if (!parsedBody.success) {
-      throw new BadRequestError('Validation error', z.treeifyError(parsedBody.error));
-    }
+  const parsedBody = RegisterUserSchema.safeParse(req.body);
+  if (!parsedBody.success) {
+    throw new BadRequestError('Validation error', z.treeifyError(parsedBody.error));
+  }
 
-    const { email, password } = parsedBody.data;
-
-    const userDto = await registerUser(email, password);
-
-    const userResponse = UserResponseSchema.parse(userDto);
-
-    res.json(userResponse);
+  const { email, password } = parsedBody.data;
+  const userDto = await registerUser(email, password);
+  const userResponse = UserResponseSchema.parse(userDto);
+  res.json(userResponse);
 };
 
 export const login = async (req: Request, res: Response) => {
-    const parsedBody = LoginUserSchema.safeParse(req.body);
-    if (!parsedBody.success) {
-      throw new BadRequestError('Validation error', z.treeifyError(parsedBody.error));
-    }
+  const parsedBody = LoginUserSchema.safeParse(req.body);
+  if (!parsedBody.success) {
+    throw new BadRequestError('Validation error', z.treeifyError(parsedBody.error));
+  }
 
-    const { email, password } = parsedBody.data;
-
-    const tokens = await loginUser(email, password);
-    res.json(tokens);
+  const { email, password } = parsedBody.data;
+  const tokens = await loginUser(email, password);
+  res.json(tokens);
 };
 
-export async function oauthGoogleCallbackLogin(req: Request, res: Response) {
+export const oauthGoogleLogin = async (req: Request, res: Response) => {
+  try {
+    const url = oauthService.getGoogleLoginUrl();
+    res.redirect(url);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const oauthGoogleCallbackLogin = async (req: Request, res: Response) => {
   try {
     const parsed = oauthQuerySchema.parse(req.query);
     const tokens = await oauthService.handleGoogleLoginCallback(parsed.code);
@@ -44,9 +49,18 @@ export async function oauthGoogleCallbackLogin(req: Request, res: Response) {
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
-}
+};
 
-export async function oauthMetaCallbackLogin(req: Request, res: Response) {
+export const oauthMetaLogin = async (req: Request, res: Response) => {
+  try {
+    const url = oauthService.getMetaLoginUrl();
+    res.redirect(url);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const oauthMetaCallbackLogin = async (req: Request, res: Response) => {
   try {
     const parsed = oauthQuerySchema.parse(req.query);
     const tokens = await oauthService.handleMetaLoginCallback(parsed.code);
@@ -54,4 +68,4 @@ export async function oauthMetaCallbackLogin(req: Request, res: Response) {
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
-}
+};
