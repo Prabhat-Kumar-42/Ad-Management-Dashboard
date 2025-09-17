@@ -1,4 +1,3 @@
-// /server/controllers/account.controller.ts
 import type { Response } from 'express';
 import { oauthService } from 'server/services/oauth.services.js';
 import type { AuthRequest } from 'server/types/auth-request.type.js';
